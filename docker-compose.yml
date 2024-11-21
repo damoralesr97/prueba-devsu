@@ -98,6 +98,7 @@ services:
       - DB_PASSWORD=admin
       - client-topic=CLIENTS
       - kafka.bootstrap-servers=kafka:9092
+      - CLIENTS_API=app-cliente-persona:8080
     depends_on:
       - db-cuentas
     networks:
