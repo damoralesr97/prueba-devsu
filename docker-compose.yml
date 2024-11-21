@@ -12,6 +12,7 @@ services:
   db-personas:
     image: postgres:latest
     container_name: db-personas
+    hostname: db-personas
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -21,11 +22,13 @@ services:
     networks:
       - devsu-network
     volumes:
+      - ./BaseDatosPersonas.sql:/docker-entrypoint-initdb.d/schema.sql
       - postgres-data-personas:/var/lib/postgresql/data
 
   db-cuentas:
     image: postgres:latest
     container_name: db-cuentas
+    hostname: db-cuentas
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -35,6 +38,7 @@ services:
     networks:
       - devsu-network
     volumes:
+      - ./BaseDatosCuentas.sql:/docker-entrypoint-initdb.d/schema.sql
       - postgres-data-cuentas:/var/lib/postgresql/data
 
   zookeeper:
@@ -62,3 +66,41 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - devsu-network
+
+  app-cliente-persona:
+    image: damoralesr97/cliente-persona-service:latest
+    build: .
+    container_name: app-cliente-persona
+    environment:
+      - DB_HOST=db-personas
+      - DB_PORT=5432
+      - DB_NAME=personasdb
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - client-topic=CLIENTS
+      - kafka.bootstrap-servers=kafka:9092
+    depends_on:
+      - db-personas
+    networks:
+      - devsu-network
+    ports:
+      - 8080:8080
+
+  app-cuenta-movimiento:
+    image: damoralesr97/cuenta-movimiento-service:latest
+    build: .
+    container_name: app-cuenta-movimiento
+    environment:
+      - DB_HOST=db-cuentas
+      - DB_PORT=5432
+      - DB_NAME=cuentasdb
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - client-topic=CLIENTS
+      - kafka.bootstrap-servers=kafka:9092
+    depends_on:
+      - db-cuentas
+    networks:
+      - devsu-network
+    ports:
+      - 8180:8180

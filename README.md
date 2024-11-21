@@ -49,9 +49,9 @@ Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene
     cd prueba-devsu
     ```
 
-3. Construir la imagen Docker y desplegar el proyecto con Docker Compose:
+3. Desplegar el proyecto con Docker Compose: (No es necesario construir las imagenes Docker de los microservicios, ya que estas imagenes las publique en mi cuenta de [DockerHub](https://hub.docker.com/u/damoralesr97))
     ```bash
-    docker-compose up --build -d
+    docker-compose up -d
     ```
 
 4. Acceder a la API a través de **Swagger**:
