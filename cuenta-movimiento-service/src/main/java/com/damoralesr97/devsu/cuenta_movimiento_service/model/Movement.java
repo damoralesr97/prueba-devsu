@@ -39,7 +39,7 @@ public class Movement {
     @Column(name = "MOV_BALANCE", nullable = false, updatable = false)
     private BigDecimal balance;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MOV_ACT_ID", referencedColumnName = "ACT_ID", nullable = false, updatable = false)
     @JsonIgnore
     private Account account;

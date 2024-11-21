@@ -7,6 +7,7 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IAcco
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementTypeEnum;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.AlreadyExistsException;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.NotFoundExcepcion;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.damoralesr97.devsu.cuenta_movimiento_service.repository.AccountRepository;
 import com.damoralesr97.devsu.cuenta_movimiento_service.mapper.AccountMapper;
@@ -103,6 +104,7 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    @Transactional
     public List<AccountResponse> findByClientId(Long clientId) {
         return accountRepository.findByClientId(clientId).stream().map(accountMapper::toResponse).toList();
     }
