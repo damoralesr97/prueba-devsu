@@ -2,6 +2,7 @@ package com.damoralesr97.devsu.cuenta_movimiento_service.dto.account.response;
 
 import com.damoralesr97.devsu.cuenta_movimiento_service.model.Movement;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.AccountTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,6 +18,8 @@ public class AccountResponse {
     private AccountTypeEnum typeAccount;
     private BigDecimal initialBalance;
     private Boolean status;
+    @JsonIgnore
+    private List<Movement> movements;
     private Long clientId;
 
 }

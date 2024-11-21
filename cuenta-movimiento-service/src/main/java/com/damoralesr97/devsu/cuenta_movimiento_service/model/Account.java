@@ -40,7 +40,7 @@ public class Account {
     @Column(name = "ACT_STATUS")
     private Boolean status;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Movement> movements;
 
