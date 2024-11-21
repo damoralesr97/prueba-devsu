@@ -4,10 +4,12 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.dto.account.event.EventA
 import com.damoralesr97.devsu.cuenta_movimiento_service.dto.client.response.ClientResponse;
 import com.damoralesr97.devsu.cuenta_movimiento_service.model.Movement;
 import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IAccountService;
+import com.damoralesr97.devsu.cuenta_movimiento_service.utils.ClientRestConsumer;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementTypeEnum;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.AlreadyExistsException;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.NotFoundExcepcion;
 import jakarta.transaction.Transactional;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.stereotype.Service;
 import com.damoralesr97.devsu.cuenta_movimiento_service.repository.AccountRepository;
 import com.damoralesr97.devsu.cuenta_movimiento_service.mapper.AccountMapper;
@@ -20,8 +22,6 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
-import static com.damoralesr97.devsu.cuenta_movimiento_service.utils.ClientRestConsumer.findClientByDni;
-
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +29,7 @@ public class AccountServiceImpl implements IAccountService {
 
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
+    private final ClientRestConsumer clientRestConsumer;
 
     @Override
     public List<AccountResponse> findAll() {
@@ -42,8 +43,8 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public AccountResponse save(AccountRequest request) {
-        Optional<ClientResponse> clientResponse = findClientByDni(request.getClientDni());
-        if (clientResponse.isEmpty()) {
+        Optional<ClientResponse> clientResponse = clientRestConsumer.findClientByDni(request.getClientDni());
+        if (clientResponse.isEmpty() || BooleanUtils.isFalse(clientResponse.get().getStatus())) {
             throw new NotFoundExcepcion("Client not found with dni " + request.getClientDni());
         }
         Optional<AccountResponse> existAccount = findByAccountNumber(request.getAccountNumber());

@@ -6,14 +6,10 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.event.Event;
 import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IAccountService;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.EventType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static org.springframework.kafka.support.KafkaHeaders.TOPIC;
 
 @Service
 @RequiredArgsConstructor

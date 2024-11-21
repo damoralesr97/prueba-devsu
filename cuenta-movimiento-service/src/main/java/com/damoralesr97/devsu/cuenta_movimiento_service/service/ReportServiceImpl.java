@@ -6,6 +6,7 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.mapper.ReportMapper;
 import com.damoralesr97.devsu.cuenta_movimiento_service.model.Movement;
 import com.damoralesr97.devsu.cuenta_movimiento_service.repository.MovementRepository;
 import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IReportService;
+import com.damoralesr97.devsu.cuenta_movimiento_service.utils.ClientRestConsumer;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.NotFoundExcepcion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,17 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
-import static com.damoralesr97.devsu.cuenta_movimiento_service.utils.ClientRestConsumer.findClientByDni;
-
 @Service
 @RequiredArgsConstructor
 public class ReportServiceImpl implements IReportService {
 
     private final MovementRepository movementRepository;
     private final ReportMapper reportMapper;
+    private final ClientRestConsumer clientRestConsumer;
 
     @Override
     public List<ReportResponse> getStatementAccount(String startDate, String endDate, String dni) {
-        Optional<ClientResponse> client = findClientByDni(dni);
+        Optional<ClientResponse> client = clientRestConsumer.findClientByDni(dni);
         if (client.isEmpty()) {
             throw new NotFoundExcepcion("Client not found with dni " + dni);
         }
