@@ -196,7 +196,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"typeAccount\": \"CURRENT\",\r\n    \"initialBalance\": 102,\r\n    \"clientDni\": \"0104493325\"\r\n}",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"typeAccount\": \"CURRENT\",\r\n    \"initialBalance\": 102,\r\n    \"clientDni\": \"0123456789\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
