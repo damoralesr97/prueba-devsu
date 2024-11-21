@@ -12,6 +12,16 @@ Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene
 - **Manejo de Errores**: Se utiliza la anotación `@RestControllerAdvice` para gestionar y capturar errores globalmente.
 - **Docker**: Despliegue de los microservicios, base de datos y kafka mediante **Docker Compose**.
 - **Pruebas**: Se implementaron pruebas unitarias y de integración para garantizar la calidad del código.
+- **Funcionalidades asíncronas**: Se implementaron 2 endpoints que funcionan de manera asíncrona utilizando **kafka**. Este enfoque desacoplado y asíncrono, mejora la escalabilidad, resiliencia y consistencia eventual entre los microservicios.
+    - `POST /clientes`: permite crear un nuevo cliente y, de manera automática y asíncrona, realiza los siguientes pasos adicionales:
+        1. **Creación del Cliente**: Registra los datos del cliente en la base de datos del microservicio de clientes.
+        2. **Notificación Asíncrona**: Publica un evento en Kafka informando sobre la creación del cliente.
+        3. **Creación de la Cuenta**: El microservicio de cuentas, al recibir el evento, crea una cuenta asociada al cliente con un saldo inicial.
+        4. **Registro de Movimiento Inicial**: También se registra un movimiento en la cuenta correspondiente al saldo de apertura.
+    - `DELETE /clientes/{dni}`: permite eliminar un cliente y, de manera automática y asíncrona, realiza los siguientes pasos adicionales:
+        1. **Eliminación del Cliente**: Borra el registro del cliente (eliminación lógica) identificado por su dni en la base de datos del microservicio de clientes.
+        2. **Notificación Asíncrona**: Publica un evento en Kafka notificando la eliminación del cliente.
+        3. **Eliminación de Cuentas**: El microservicio de cuentas, al recibir el evento, elimina todas las cuentas asociadas al cliente (eliminación lógica).
 
 ## Requisitos
 
@@ -34,12 +44,17 @@ Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene
     git clone https://github.com/damoralesr97/prueba-devsu.git
     ```
 
-2. Construir la imagen Docker y desplegar el proyecto con Docker Compose:
+2. Navegar al directorio del proyecto:
+    ```bash
+    cd prueba-devsu
+    ```
+
+3. Construir la imagen Docker y desplegar el proyecto con Docker Compose:
     ```bash
     docker-compose up --build -d
     ```
 
-3. Acceder a la API a través de **Swagger**:
+4. Acceder a la API a través de **Swagger**:
     - Personas/Clientes: `http://localhost:8080/swagger-ui.html`
     - Cuentas/Movimientos: `http://localhost:8180/swagger-ui.html`
 
