@@ -2,7 +2,7 @@ package com.damoralesr97.devsu.cuenta_movimiento_service.controller.exception;
 
 import com.damoralesr97.devsu.cuenta_movimiento_service.dto.exception.ErrorDTO;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.AlreadyExistsException;
-import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.InsufficientBalanceException;
+import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.MovementExcepcion;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.NotFoundExcepcion;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -39,11 +39,11 @@ public class HandlerExceptionController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDTO);
     }
 
-    @ExceptionHandler({InsufficientBalanceException.class})
-    public ResponseEntity<ErrorDTO> insufficientBalanceException(Exception ex) {
+    @ExceptionHandler({MovementExcepcion.class})
+    public ResponseEntity<ErrorDTO> movementExcepcion(Exception ex) {
         ErrorDTO errorDTO = ErrorDTO.builder()
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .error("Insufficient balance")
+                .error("Movement error")
                 .message(ex.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();

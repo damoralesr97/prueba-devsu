@@ -6,7 +6,7 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.model.Account;
 import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IAccountService;
 import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IMovementService;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementTypeEnum;
-import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.InsufficientBalanceException;
+import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.MovementExcepcion;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.NotFoundExcepcion;
 import org.springframework.stereotype.Service;
 import com.damoralesr97.devsu.cuenta_movimiento_service.repository.MovementRepository;
@@ -42,15 +42,15 @@ public class MovementServiceImpl implements IMovementService {
 
     @Override
     public MovementResponse save(MovementRequest request) {
+        MovementTypeEnum movementType = getMovementType(request.getValue());
         Optional<AccountResponse> account = accountService.findByAccountNumber(request.getAccountNumber());
         if (account.isEmpty()) {
             throw new NotFoundExcepcion("Account " + request.getAccountNumber() + " not found.");
         }
         Account accountEntity = accountMapper.toEntityFromResponse(account.get());
-        MovementTypeEnum movementType = getMovementType(request.getValue());
         if (MovementTypeEnum.WITHDRAWAL == movementType) {
             if (!hasSufficientBalance(accountEntity.calculateBalance(), request.getValue())) {
-                throw new InsufficientBalanceException("Account " + accountEntity.getAccountNumber() + " has insufficient balance");
+                throw new MovementExcepcion("Account " + accountEntity.getAccountNumber() + " has insufficient balance");
             }
         }
         Movement movement = movementMapper.toEntity(request);
@@ -80,8 +80,10 @@ public class MovementServiceImpl implements IMovementService {
     private MovementTypeEnum getMovementType(BigDecimal value) {
         if (value.signum() > 0) {
             return MovementTypeEnum.DEPOSIT;
-        } else {
+        } else if (value.signum() < 0) {
             return MovementTypeEnum.WITHDRAWAL;
+        } else {
+            throw new MovementExcepcion("You cannot perform a movement with value 0");
         }
     }
 
