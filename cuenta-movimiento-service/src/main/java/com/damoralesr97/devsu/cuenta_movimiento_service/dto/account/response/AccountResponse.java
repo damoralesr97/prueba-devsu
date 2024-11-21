@@ -17,7 +17,6 @@ public class AccountResponse {
     private AccountTypeEnum typeAccount;
     private BigDecimal initialBalance;
     private Boolean status;
-    private List<Movement> movements;
     private Long clientId;
 
 }

@@ -1,9 +1,10 @@
 package com.damoralesr97.devsu.cuenta_movimiento_service.dto.movement.response;
 
 import java.sql.Timestamp;
+
+import com.damoralesr97.devsu.cuenta_movimiento_service.dto.account.response.AccountResponse;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementTypeEnum;
 import java.math.BigDecimal;
-import com.damoralesr97.devsu.cuenta_movimiento_service.model.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -16,6 +17,6 @@ public class MovementResponse {
     private MovementTypeEnum movementType;
     private BigDecimal value;
     private BigDecimal balance;
-    private Account account;
+    private AccountResponse account;
 
 }
