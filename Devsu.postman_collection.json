@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "d06c4373-3082-4e52-b92f-ef05df198752",
+		"name": "Devsu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13068591"
+	},
+	"item": [
+		{
+			"name": "clientes",
+			"item": [
+				{
+					"name": "clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/{dni}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes/0123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"0123456789"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"David Morales\",\r\n    \"genre\": \"M\",\r\n    \"age\": 27,\r\n    \"dni\": \"0123456789\",\r\n    \"address\": \"Av 10 de Agosto\",\r\n    \"phoneNumber\": \"0998745566\",\r\n    \"password\": \"password\",\r\n    \"accountNumber\": \"123456\",\r\n    \"typeAccount\": \"CURRENT\",\r\n    \"initialBalance\": 100.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/{dni}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"David Morales\",\r\n    \"genre\": \"M\",\r\n    \"age\": 27,\r\n    \"dni\": \"0123456789\",\r\n    \"address\": \"Via a Banos\",\r\n    \"phoneNumber\": \"0998874455\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/clientes/0123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"0123456789"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/{dni}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes/0123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"0123456789"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cuentas",
+			"item": [
+				{
+					"name": "cuentas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8180/cuentas",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/{accountNumber}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8180/cuentas/123456",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"cuentas",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"typeAccount\": \"SAVINGS\",\r\n    \"initialBalance\": 10,\r\n    \"clientDni\": \"0123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8180/cuentas",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/accountNumber",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"typeAccount\": \"CURRENT\",\r\n    \"initialBalance\": 102,\r\n    \"clientDni\": \"0104493325\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8180/cuentas/123456",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"cuentas",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/{accountNumber}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8180/cuentas/123456",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"cuentas",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movimientos",
+			"item": [
+				{
+					"name": "movimientos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8180/movimientos",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movimientos/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8180/movimientos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"movimientos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movimientos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"value\": -90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8180/movimientos",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reportes",
+			"item": [
+				{
+					"name": "reportes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8180/reportes?startDate=2024-11-19&endDate=2024-12-31&dni=0123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"reportes"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2024-11-19",
+									"description": "Not required"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31",
+									"description": "Not required"
+								},
+								{
+									"key": "dni",
+									"value": "0123456789"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
