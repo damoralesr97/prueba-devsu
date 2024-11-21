@@ -23,7 +23,7 @@ Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene
         2. **Notificación Asíncrona**: Publica un evento en Kafka notificando la eliminación del cliente.
         3. **Eliminación de Cuentas**: El microservicio de cuentas, al recibir el evento, elimina todas las cuentas asociadas al cliente (eliminación lógica).
 
-## Requisitos
+## Tecnologias utilizadas
 
 - **Java 21**
 - **Spring Boot**
