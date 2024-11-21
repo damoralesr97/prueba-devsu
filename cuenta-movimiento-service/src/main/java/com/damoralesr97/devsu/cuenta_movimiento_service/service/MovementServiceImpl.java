@@ -8,6 +8,7 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.service.interfaces.IMove
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementTypeEnum;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.MovementExcepcion;
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.exceptions.NotFoundExcepcion;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.stereotype.Service;
 import com.damoralesr97.devsu.cuenta_movimiento_service.repository.MovementRepository;
 import com.damoralesr97.devsu.cuenta_movimiento_service.mapper.MovementMapper;
@@ -44,7 +45,7 @@ public class MovementServiceImpl implements IMovementService {
     public MovementResponse save(MovementRequest request) {
         MovementTypeEnum movementType = getMovementType(request.getValue());
         Optional<AccountResponse> account = accountService.findByAccountNumber(request.getAccountNumber());
-        if (account.isEmpty()) {
+        if (account.isEmpty() || BooleanUtils.isFalse(account.get().getStatus())) {
             throw new NotFoundExcepcion("Account " + request.getAccountNumber() + " not found.");
         }
         Account accountEntity = accountMapper.toEntityFromResponse(account.get());
