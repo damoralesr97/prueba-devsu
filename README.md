@@ -1,5 +1,13 @@
 # Prueba Técnica/Practica Devsu
 
+## Índice
+1. [Resumen](#resumen)
+2. [Características](#características)
+3. [Tecnologias utilizadas](#tecnologias-utilizadas)
+4. [Iniciar el Proyecto](#iniciar-el-proyecto)
+5. [Funcionalidades](#funcionalidades)
+6. [Notas Adicionales](#notas-adicionales)
+
 ## Resumen:
 
 Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene la implementación de dos microservicios que se comunican tanto de manera **sincrónica** (a través de peticiones HTTP) como **asincrónica** (utilizando **Kafka**). Cada microservicio gestiona su propia base de datos **PostgreSQL**.
