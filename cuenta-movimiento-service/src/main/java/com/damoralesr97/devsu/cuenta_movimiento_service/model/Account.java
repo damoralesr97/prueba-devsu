@@ -1,10 +1,11 @@
 package com.damoralesr97.devsu.cuenta_movimiento_service.model;
 
 import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.AccountTypeEnum;
-import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,14 +28,18 @@ public class Account {
     private Long id;
 
     @Column(name = "ACT_NUMBER", unique = true, nullable = false, updatable = false)
+    @Pattern(regexp = "[0-9]+", message = "El numero de cuenta solo debe contener numeros")
+    @NotNull(message = "El numero de cuenta es requerido")
     private String accountNumber;
 
     @Column(name = "ACT_TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "El tipo de cuenta es requerido")
     private AccountTypeEnum typeAccount;
 
     @Column(name = "ACT_INITIAL_BALANCE", nullable = false, updatable = false)
     @Min(value = 1,message = "El saldo inicial debe ser mayor o igual 1")
+    @NotNull(message = "El monto inicial es requerido")
     private BigDecimal initialBalance;
 
     @Column(name = "ACT_STATUS")

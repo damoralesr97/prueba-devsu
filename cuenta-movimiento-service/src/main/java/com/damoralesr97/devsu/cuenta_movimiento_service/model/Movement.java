@@ -4,6 +4,7 @@ import com.damoralesr97.devsu.cuenta_movimiento_service.utils.enums.MovementType
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Movement {
     private MovementTypeEnum movementType;
 
     @Column(name = "MOV_VALUE", nullable = false, updatable = false)
+    @NotNull(message = "El valor es requerido")
     private BigDecimal value;
 
     @Column(name = "MOV_BALANCE", nullable = false, updatable = false)
