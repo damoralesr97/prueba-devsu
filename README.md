@@ -4,7 +4,7 @@
 1. [Resumen](#resumen)
 2. [Características](#características)
 3. [Tecnologias utilizadas](#tecnologias-utilizadas)
-4. [Iniciar el Proyecto](#iniciar-el-proyecto)
+4. [Instrucciones para desplegar](#instrucciones-para-desplegar)
 5. [Funcionalidades](#funcionalidades)
 6. [Notas Adicionales](#notas-adicionales)
 
@@ -39,13 +39,13 @@ Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene
 - **PostgreSQL**
 - **Kafka**
 
-## Iniciar el Proyecto
+## Instrucciones para desplegar
 
 ### Requisitos Previos
 
 - Tener **Docker** y **Docker Compose** instalados.
 
-### Pasos para Ejecutar
+### Pasos para Desplegar
 
 1. Clonar el repositorio:
     ```bash
@@ -62,9 +62,10 @@ Este proyecto ha sido desarrollado en **Spring Boot** con **Java 21** y contiene
     docker-compose up -d
     ```
 
-4. Acceder a la API a través de **Swagger**:
+4. Acceder a la API a través de **Swagger** o en el archivo JSon de Postam:
     - Personas/Clientes: `http://localhost:8080/swagger-ui.html`
     - Cuentas/Movimientos: `http://localhost:8180/swagger-ui.html`
+    - [Postman JSon](Devsu.postman_collection.json)
 
 ## Funcionalidades
 
